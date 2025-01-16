@@ -22,8 +22,14 @@ func New() *validator.Validate {
 	return v
 }
 
+var v *validator.Validate
+
+func init() {
+	v = New()
+}
+
 func ValidateStruct(val any) error {
-	return New().Struct(val)
+	return v.Struct(val)
 }
 
 func DateValidator(fl validator.FieldLevel) bool {
@@ -40,11 +46,11 @@ func DateValidator(fl validator.FieldLevel) bool {
 
 func SecondsValidator(fl validator.FieldLevel) bool {
 	if val, ok := fl.Field().Interface().(secs.Seconds); ok {
-		return val.Seconds() > 0
+		return val > 0
 	}
 
 	if val, ok := fl.Field().Interface().(*secs.Seconds); ok {
-		return val != nil && val.Seconds() > 0
+		return val != nil && *val > 0
 	}
 
 	return false
