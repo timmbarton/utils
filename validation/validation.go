@@ -29,6 +29,7 @@ func init() {
 	v = New()
 }
 
+//goland:noinspection ALL
 func ValidateStruct(val any) error {
 	return v.Struct(val)
 }
