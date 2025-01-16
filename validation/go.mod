@@ -2,10 +2,15 @@ module github.com/timmbarton/utils/validation
 
 go 1.23.3
 
+replace (
+	github.com/timmbarton/utils/types/dates => ../types/dates
+	github.com/timmbarton/utils/types/secs => ../types/secs
+)
+
 require (
 	github.com/go-playground/validator/v10 v10.24.0
-	github.com/timmbarton/utils/types/dates v0.0.0-20250116121542-b4510cc50241
-	github.com/timmbarton/utils/types/secs v0.0.0-20250116121542-b4510cc50241
+	github.com/timmbarton/utils/types/dates v0.0.0-00010101000000-000000000000
+	github.com/timmbarton/utils/types/secs v0.0.0-00010101000000-000000000000
 )
 
 require (

@@ -2,6 +2,7 @@ package validation
 
 import (
 	"github.com/go-playground/validator/v10"
+
 	"github.com/timmbarton/utils/types/dates"
 	"github.com/timmbarton/utils/types/secs"
 )
