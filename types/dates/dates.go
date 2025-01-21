@@ -10,15 +10,15 @@ import (
 
 type Date time.Time
 
-func (d *Date) Unix() int64 {
-	return time.Time(*d).Unix()
+func (d Date) Unix() int64 {
+	return time.Time(d).Unix()
 }
 
-func (d *Date) String() string {
-	return time.Time(*d).Format(time.DateOnly)
+func (d Date) String() string {
+	return time.Time(d).Format(time.DateOnly)
 }
 
-func (d *Date) MarshalJSON() ([]byte, error) {
+func (d Date) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d.String())
 }
 func (d *Date) UnmarshalJSON(data []byte) error {
@@ -32,7 +32,7 @@ func (d *Date) UnmarshalJSON(data []byte) error {
 	return d.UnmarshalText([]byte(dateStr))
 }
 
-func (d *Date) MarshalText() (text []byte, err error) {
+func (d Date) MarshalText() (text []byte, err error) {
 	return []byte(d.String()), nil
 }
 func (d *Date) UnmarshalText(text []byte) error {

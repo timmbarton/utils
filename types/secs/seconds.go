@@ -7,8 +7,8 @@ import (
 
 type Seconds time.Duration
 
-func (s *Seconds) MarshalJSON() ([]byte, error) {
-	return json.Marshal((*time.Duration)(s).Seconds())
+func (s Seconds) MarshalJSON() ([]byte, error) {
+	return json.Marshal(time.Duration(s).Seconds())
 }
 
 func (s *Seconds) UnmarshalJSON(b []byte) error {
@@ -21,6 +21,6 @@ func (s *Seconds) UnmarshalJSON(b []byte) error {
 
 	return nil
 }
-func (s *Seconds) String() string {
-	return time.Duration(*s).String()
+func (s Seconds) String() string {
+	return time.Duration(s).String()
 }
