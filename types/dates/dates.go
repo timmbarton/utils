@@ -55,7 +55,7 @@ func (d *Date) Scan(value any) error {
 		return errors.New(fmt.Sprintf("unsupported type for (d *Date) Scan()"))
 	}
 }
-func (d *Date) Value() (val driver.Value, err error) {
+func (d Date) Value() (val driver.Value, err error) {
 	return d.MarshalText()
 }
 
