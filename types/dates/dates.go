@@ -68,3 +68,8 @@ func DateRange(start, end Date) []Date {
 
 	return dateRange
 }
+
+//goland:noinspection ALL
+func DateFromUnix(unixSeconds int64) Date {
+	return Date(time.Unix(unixSeconds, 0).Truncate(time.Hour * 24))
+}
