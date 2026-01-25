@@ -69,7 +69,33 @@ func DateRange(start, end Date) []Date {
 	return dateRange
 }
 
+const day = 24 * time.Hour
+
 //goland:noinspection ALL
-func DateFromUnix(unixSeconds int64) Date {
-	return Date(time.Unix(unixSeconds, 0).Truncate(time.Hour * 24))
+func FromUnix(unixSeconds int64) Date {
+	return FromTime(time.Unix(unixSeconds, 0))
+}
+
+//goland:noinspection ALL
+func FromUnixMilli(unixMilliSeconds int64) Date {
+	return FromTime(time.UnixMilli(unixMilliSeconds))
+}
+
+func FromTime(t time.Time) Date {
+	return Date(t.Truncate(day))
+}
+
+//goland:noinspection ALL
+func Today() Date {
+	return FromTime(time.Now())
+}
+
+//goland:noinspection ALL
+func Yesterday() Date {
+	return FromTime(time.Now().Add(-day))
+}
+
+//goland:noinspection ALL
+func Tomorrow() Date {
+	return FromTime(time.Now().Add(day))
 }
