@@ -444,6 +444,54 @@ func TestComparison(t *testing.T) {
 	}
 }
 
+func TestParse(t *testing.T) {
+	tests := []struct {
+		name    string
+		s       string
+		want    Date
+		wantErr bool
+	}{
+		{
+			name:    "valid date",
+			s:       "2023-10-10",
+			want:    Date{2023, 10, 10},
+			wantErr: false,
+		},
+		{
+			name:    "empty string",
+			s:       "",
+			wantErr: true,
+		},
+		{
+			name:    "invalid format",
+			s:       "10-10-2023",
+			wantErr: true,
+		},
+		{
+			name:    "invalid date values (feb 29 in non-leap year)",
+			s:       "2023-02-29",
+			wantErr: true,
+		},
+		{
+			name:    "random string",
+			s:       "not-a-date",
+			wantErr: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := Parse(tt.s)
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Parse() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !tt.wantErr && !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Parse() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestNullJSON(t *testing.T) {
 	t.Run("marshal empty", func(t *testing.T) {
 		d := Date{}

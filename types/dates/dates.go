@@ -180,3 +180,10 @@ func Yesterday() Date {
 func Tomorrow() Date {
 	return FromTime(time.Now().Add(day))
 }
+
+//goland:noinspection ALL
+func Parse(s string) (Date, error) {
+	d := Date{}
+	err := d.UnmarshalText([]byte(s))
+	return d, err
+}
